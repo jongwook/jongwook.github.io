@@ -67,6 +67,10 @@ pagination_dir: page
 ## Themes: https://hexo.io/themes/
 theme: minos
 
+# Pandoc
+pandoc:
+  mathEngine: katex
+
 # Deployment
 ## Docs: https://hexo.io/docs/deployment.html
 deploy:

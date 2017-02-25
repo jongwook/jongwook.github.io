@@ -1,38 +1,13 @@
----
 title: Hello World
+tags: ['Hexo', 'LaTeX', 'KaTeX']
+categories: ['Other']
+date: 2017-02-24 22:35:00
 ---
-Welcome to [Hexo](https://hexo.io/)! This is your very first post. Check [documentation](https://hexo.io/docs/) for more info. If you get any problems when using Hexo, you can find the answer in [troubleshooting](https://hexo.io/docs/troubleshooting.html) or you can ask me on [GitHub](https://github.com/hexojs/hexo/issues).
 
-## Quick Start
+I have just set up a new blog with [Hexo](https://hexo.io/), and made a slightly modified version of [hexo-tag-katex](https://github.com/jongwook/hexo-tag-katex) to compile LaTeX expressions inside dollar signs, instead of using Hexo tags. [KaTeX](https://khan.github.io/KaTeX/) is a wonderful library built by [Khan Academy](https://www.khanacademy.org/), which renders LaTeX equations a lot faster and more beautifully than MathJax.
 
-### Create a new post
+\[
+H(T) | \psi(t) > = i \hbar \frac{\partial}{\partial t} | \psi(t) >
+\]
 
-``` bash
-$ hexo new "My New Post"
-```
-
-More info: [Writing](https://hexo.io/docs/writing.html)
-
-### Run server
-
-``` bash
-$ hexo server
-```
-
-More info: [Server](https://hexo.io/docs/server.html)
-
-### Generate static files
-
-``` bash
-$ hexo generate
-```
-
-More info: [Generating](https://hexo.io/docs/generating.html)
-
-### Deploy to remote sites
-
-``` bash
-$ hexo deploy
-```
-
-More info: [Deployment](https://hexo.io/docs/deployment.html)
+I like this hackability and the native integration with the browsers of Hexo, and in part that I am less familiar with Ruby. I am going to make this my personal website, migrating from Tumbler which started to put a video ad on their page.
