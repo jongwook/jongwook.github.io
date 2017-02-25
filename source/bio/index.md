@@ -2,7 +2,7 @@ title: Bio
 layout: about
 ---
 
-Please find a one-page [Résumè](jongwook-kim-resume.pdf) or a three-page [CV](jongwook-kim-cv.pdf) of mine.
+Please find a one-page [Résumé](jongwook-kim-resume.pdf) or a three-page [CV](jongwook-kim-cv.pdf) of mine.
 
 I am pursuing a PhD in Music Technology at New York University since 2011. Under Dr. Juan Pablo Bello’s supervision, I worked on projects that apply numerous machine learning techniques to statistically analyze music signals and deduce its musical properties like tempo, genre, melody, harmony etc. During the study I took a leave of absence between the summers of 2012 and 2015 for the military service in South Korea.
 
