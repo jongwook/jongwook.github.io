@@ -14,10 +14,16 @@
 #header-inner
   position: relative
   overflow: hidden
+  @media mq-mobile
+    text-align: center
 
 #main-nav
   float: left
-  margin-left: -25px
+  margin-left: -24px
+  @media mq-mobile
+    float: none
+    margin-left: 0
+    display: inline-block 
 
 $nav-link
   float: left
@@ -26,6 +32,8 @@ $nav-link
   transition: opacity 0.2s
   display: block
   padding: 0px 10px
+  @media mq-mobile
+    padding: 0px 8px
 
 .main-nav-link
   @extend $nav-link
