@@ -17,7 +17,7 @@
 
 #main-nav
   float: left
-  margin-left: -15px
+  margin-left: -30px
 
 $nav-link
   float: left
@@ -25,14 +25,14 @@ $nav-link
   text-decoration: none
   transition: opacity 0.2s
   display: block
-  padding: 20px 15px
+  padding: 0px 15px
 
 .main-nav-link
   @extend $nav-link
   font-weight: ligher
-  @media mq-mobile
-    float: none
-    text-align: center
+//  @media mq-mobile
+//    float: none
+//    text-align: center
 
 #main-nav-toggle
   @extend $nav-link
@@ -42,36 +42,36 @@ $nav-link
   font-family: font-icon
   &:before
     content: "\f0c9"
-  @media mq-mobile
-    display: block
+//  @media mq-mobile
+//    display: block
 
 #logo
   float:left
-  @media mq-mobile
-    float: none
-    margin: 0 auto
-    display: block
-    background-position: center
+//  @media mq-mobile
+//    float: none
+//    margin: 0 auto
+//    display: block
+//    background-position: center
 
 #sub-nav
   float: right
 
 #main-nav,
 #sub-nav
-  @media mq-mobile
-    display: none
-    float: none
+//  @media mq-mobile
+//    display: none
+//    float: none
 
 #search-form-wrap
   top: 15px
   padding: 20px 15px
-  @media mq-mobile
-    text-align: center
+//  @media mq-mobile
+//    text-align: center
 
 .search-form
   clearfix()
-  @media mq-mobile
-    display: inline-block
+//  @media mq-mobile
+//    display: inline-block
 
 .search-form-input
   width: 150px

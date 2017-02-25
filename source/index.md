@@ -3,7 +3,7 @@ layout: "about"
 ---
 
 <style type="text/css">
-span.fa { font-size: 10pt; }
+span.fa { font-size: 10pt; color: #222; }
 span.fa:before { font-family: FontAwesome; }
 span.fa-github:before { content: "\f09b"; }
 span.fa-github-square:before { content: "\f092"; }
