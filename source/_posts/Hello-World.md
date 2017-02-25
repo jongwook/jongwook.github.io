@@ -1,6 +1,6 @@
 title: Hello World
 tags: ['Hexo', 'LaTeX', 'KaTeX']
-categories: ['Other']
+categories: ['Blog']
 date: 2017-02-24 22:35:00
 ---
 
