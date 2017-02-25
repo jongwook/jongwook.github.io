@@ -3,7 +3,6 @@ logo_text: # Add text logo instead of logo image
 menu:
   Home: /
   Bio: bio
-  CV: CV
   Archives: archives
   Categories: categories
   Tags: tags

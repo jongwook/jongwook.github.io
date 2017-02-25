@@ -2,6 +2,8 @@ title: Bio
 layout: about
 ---
 
+Please find a one-page [Résumè](jongwook-kim-resume.pdf) or a three-page [CV](jongwook-kim-cv.pdf) of mine.
+
 I am pursuing a PhD in Music Technology at New York University since 2011. Under Dr. Juan Pablo Bello’s supervision, I worked on projects that apply numerous machine learning techniques to statistically analyze music signals and deduce its musical properties like tempo, genre, melody, harmony etc. During the study I took a leave of absence between the summers of 2012 and 2015 for the military service in South Korea.
 
 For the latter half of those three years I worked at Kakao Corp., designing and developing recommender systems which provide personalized recommendations for the company’s hundreds of millions of users. To achieve this I utilized a number of (so-called) big data solutions including Hadoop, Hive, HBase and Spark. Before that, I worked at NCSOFT and developed a distributed MMORPG game platform for a title called Lineage Eternal, using techniques like consistent hashing, in-memory data grids, functional reactive programming, etc.
