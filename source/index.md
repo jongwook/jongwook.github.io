@@ -15,4 +15,4 @@ span.fa-envelope:before{ content: "\f0e0"; }
 
 I’m a PhD Candidate studying music technology at New York University. I focus in music informatics and machine learning, looking for solutions to automatic transcription, source separation, timbre modeling, etc. In the past, I was a software engineer/data scientist at Kakao Corp and NCSOFT Corp developing recommender systems and application servers.
 
-This site serves as a personal portal where you can jump to my social network pages, browse through blog articles or check out my bio and CV. Check out the links on the menu; in the mobile view, the menu button is on the upper right.
+This site serves as a personal portal where you can jump to my Github and LinkedIn pages, browse through blog articles, or check out my bio and CV.
