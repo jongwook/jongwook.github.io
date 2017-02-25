@@ -10,6 +10,8 @@
 #header-outer
   height: 100%
   position: relative
+  @media mq-mobile
+    padding: 0
 
 #header-inner
   position: relative
@@ -73,8 +75,8 @@ $nav-link
 #search-form-wrap
   top: 15px
   padding: 20px 15px
-//  @media mq-mobile
-//    text-align: center
+  @media mq-mobile
+    padding: 20px 0px
 
 .search-form
   clearfix()
