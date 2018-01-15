@@ -1,7 +1,7 @@
 ---
 title: Anatomy of TFRecord
 date: 2018-01-14 19:27:49
-tags:
+tags: ['TensorFlow', 'TFRecord', 'Keras']
 ---
 
 # What is TFRecord?
@@ -97,7 +97,7 @@ These are the standard steps for using the new Dataset API, which allows functio
 
 # Taking The Best of Both Worlds
 
-If we want to keep using the goodies that Keras like its cleaner API and toolings, we can convert the tensorflow operation into a Python generator that can be fed to `fit_generator()`. This way, rather than starting from the scratch as in the low-level way above, we can benefit from the functional Dataset API for easier data transformation and memory management for large datasets, while keeping using what Keras is good for.
+If we want to keep using the goodies that Keras provides like its cleaner API and toolings, we can convert the tensorflow operation into a Python generator that can be fed to `fit_generator()`. This way, rather than starting from the scratch as in the low-level way above, we can benefit from the functional Dataset API for easier data transformation and memory management for large datasets, while keeping using what Keras is good for.
 
 Below is a full example for loading a TFRecord file and converting it to a generator producing the usual (data, label) tuples:
 
