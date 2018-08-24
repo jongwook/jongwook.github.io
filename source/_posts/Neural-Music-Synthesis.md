@@ -1,7 +1,6 @@
 ---
 title: 'DRAFT: Neural Music Synthesis'
 date: 2018-08-23 22:22:29
-password: wip
 tags: ['Spotify', 'Research']
 ---
 
@@ -21,7 +20,7 @@ Furthermore, having a solid architecture of music synthesis model allows to buil
 
 {% asset_img ae.jpg autoencoder %}
 
-I would say that the autoencoding task above is essentially what a musician's brain is capable of; they appreciate the sound of music in the form of the mental representation consisting of individual notes and their combinations, thanks to the automatic conversion between the physical soundwave and the mental representation happening under the hood.
+The autoencoding task above is essentially what a musician's brain is capable of; they appreciate the sound of music in the form of the mental representation consisting of individual notes and their combinations, thanks to the automatic conversion between the physical soundwave and the mental representation happening under the hood.
 
 In contrast to the extensive record of machine learning research for the encoder part, fewer resources are available to implement the decoder part, as most of the studies on music synthesis have been geared toward artistic applications and the engineering for achieving it. This is what motivated my internship project: a predictable music synthesis model with separate knobs for controlling the timbre and the other qualities of music.
 
@@ -39,12 +38,34 @@ In contrast to the extensive record of machine learning research for the encoder
 - The Onsets and Frames Representation
 - FiLM Layer for Timbre Conditioning
 
+<img src="Neural-Music-Synthesis/FiLM.png" width="200px">
+
+\[
+    \gamma _ {i, c} = f _ c ( \mathbf{x} _ i ), ~~~~ \beta _ {i, c} = h _ c ( \mathbf{x} _ i ).
+\]
+
+\[
+    \mathrm{FiLM}(\mathbf{F} _ {i,c} | \gamma _ {i, c}, \beta _ {i, c}) = \gamma _ {i,c} \mathbf{F} _ {i, c} + \beta _ {i, c}.
+\]
+
 ## Results
 
 - Generated Mel Spectrograms
+
+<video src="Neural-Music-Synthesis/video.mp4" controls loop></video>
+
 - Reconstruction Accuracy w.r.t. Loss functions and Instruments
+
+<p style="text-align: center;"><img src="Neural-Music-Synthesis/correlations.svg" width="40%" style="display: inline;"><img src="Neural-Music-Synthesis/correlations-instrument.svg" width="40%" style="display: inline;"></p>
+
 - Embedding Space Visualization
+
+<p style="text-align: center;"><img src="Neural-Music-Synthesis/centroid.svg" width="40%" style="display: inline;"><img src="Neural-Music-Synthesis/energy.svg" width="40%" style="display: inline;"></p>
+
 - MOS
+
+<p style="text-align: center;"><table border cellspaing="0" cellpadding="0"><thead><tr><th>Condition</th> <th>Scores $\pm$ SEM</th><th>Condition</th> <th>Scores $\pm$ SEM</th></tr></thead><tbody><tr><td>Original</td><td>$4.316 \pm 0.041 $</td><td>tanh-log-abs MSE</td><td>$3.183 \pm 0.056 $</td></tr><tr><td>mu-law Only</td><td>$3.879 \pm 0.051 $</td><td>log-abs MSE</td><td>$3.011 \pm 0.058 $</td></tr><tr><td>Ground-Truth Mel</td><td>$3.378 \pm 0.052 $</td><td>abs MSE</td><td>$ 2.757 \pm 0.058 $</td></tr></tbody></table></p>
+
 - 100-instrument visualization (4D t-SNE)
 
 ## Conclusions
