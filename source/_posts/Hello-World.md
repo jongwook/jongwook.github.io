@@ -1,4 +1,5 @@
 title: Hello World
+date: 2018-01-01 00:00:00
 tags: ['Hexo', 'LaTeX', 'KaTeX']
 categories: ['Blog']
 ---
