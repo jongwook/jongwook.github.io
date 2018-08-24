@@ -1,12 +1,11 @@
 ---
-title: Neural Music Synthesis
+title: 'DRAFT: Neural Music Synthesis'
 date: 2018-08-23 22:22:29
 password: wip
 tags: ['Spotify', 'Research']
 ---
 
 <!-- Intro -->
-**WORK IN PROGRESS**
 
 During the summer of 2018, I have worked as a research scientist intern at Spotify. I have been to the NYC headquarter for one of the [Monthly Music Hackathon](http://monthlymusichackathon.org/post/169872330642/science-of-music-hackathon-the-monthly-music) events, but to partake in one of [the world's best internship programs](https://www.nationalinternday.com/top100-2018/) was such a tremendous experience. In this post, I'd like to share a summary of my internship project on music synthesis, that I am finalizing here at Spotify.
 
