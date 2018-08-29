@@ -95,16 +95,22 @@ For the WaveNet vocoder, we used [nv-wavenet](https://devblogs.nvidia.com/nv-wav
 
 <p style="text-align: center;"><table style="width: 700px; margin: auto;" border cellspaing="0" cellpadding="0"><thead><tr><th>Condition</th> <th>Scores $\pm$ SEM</th><th>Condition</th> <th>Scores $\pm$ SEM</th></tr></thead><tbody><tr><td>Original</td><td>$4.316 \pm 0.041 $</td><td>tanh-log-abs MSE</td><td>$3.183 \pm 0.056 $</td></tr><tr><td>mu-law Only</td><td>$3.879 \pm 0.051 $</td><td>log-abs MSE</td><td>$3.011 \pm 0.058 $</td></tr><tr><td>Ground-Truth Mel</td><td>$3.378 \pm 0.052 $</td><td>abs MSE</td><td>$ 2.757 \pm 0.058 $</td></tr></tbody></table></p>
 
+- TODO: Ablation Study
+
 - TODO: 100-instrument visualization (4D t-SNE)
+  - 88 from rachel
+  - 10 from original
+  - 2 from ???
 
-## Conclusions
+## Conclusion and Future Work
 
-- Built a model which combines RNN and WaveNet to synthesize polyphonic music from MIDI score and instrument information
-- We can interpolate between instruments 
+We showed that it is possible to build a music synthesis model by combining a recurrent neural network and FiLM conditioning layers, followed by a WaveNet decoder. It successfully learns to synthesize musical notes according to the given MIDI score and timbre conditioning. In addition, it is possible to interpolate between instruments in the embedding space, giving the ability of timbre morphing.
 
-## Up Next
+- larger capacity model
+
+- More than just deterministic: generative modeling
+
+Our music synthesis model draws audio samples conditioned on timbre embedding and the symbolic music in the form of piano rolls. An interesting extension to this model would be obtaining the inverse; predicting the distribution of timbre embeddings from audio would be useful for instrument recognition and provide a tool for music production where a software instrument can be built automatically from a few audio examples. The other part of the inversion, predicting the piano roll from audio, is essentially automatic music transcription which is a much more formidable task, and the aforementioned autoencoder formulation would be an interesting direction to solve transcription and synthesis simultaneously.
 
 - expressive/flexible timing
-- larger capacity model
-- Learning about the inverse of the network
-- More than just deterministic: generative modeling
+
