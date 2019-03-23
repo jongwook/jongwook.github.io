@@ -2,11 +2,11 @@ title: Bio
 layout: about
 ---
 
-Please find a one-page [Résumé](jongwook-kim-resume.pdf) or a three-page [CV](jongwook-kim-cv.pdf) of mine.
+Please find a two-page [Résumé](resume-jongwook-kim.pdf) of mine.
 
-I am pursuing a PhD in Music Technology at New York University since 2011. Under Dr. Juan Pablo Bello’s supervision, I worked on projects that apply numerous machine learning techniques to statistically analyze music signals and deduce its musical properties like tempo, genre, melody, harmony etc. During the study I took a leave of absence between the summers of 2012 and 2015 for the military service in South Korea.
+I am pursuing a PhD in Music Technology at New York University since 2011. Under Dr. Juan Pablo Bello’s supervision, I worked on projects that apply numerous machine learning techniques to statistically analyze music signals and deduce its musical properties like tempo, genre, melody, harmony etc. During the study I took a leave of absence starting in 2012 for the military service in South Korea.
 
-For the latter half of those three years I worked at Kakao Corp., designing and developing recommender systems which provide personalized recommendations for the company’s hundreds of millions of users. To achieve this I utilized a number of (so-called) big data solutions including Hadoop, Hive, HBase and Spark. Before that, I worked at NCSOFT and developed a distributed MMORPG game platform for a title called Lineage Eternal, using techniques like consistent hashing, in-memory data grids, functional reactive programming, etc.
+For the latter half of those years I worked at Kakao Corp., designing and developing recommender systems which provide personalized recommendations for the company’s hundreds of millions of users. To achieve this I utilized a number of (so-called) big data solutions including Hadoop, Hive, HBase and Spark. Before that, I worked at NCSOFT and developed a distributed MMORPG game platform for a title called Lineage Eternal, using techniques like consistent hashing, in-memory data grids, functional reactive programming, etc.
 
 I received a Master of Science degree in computer science from Rackham Graduate School, University of Michigan. Focusing on intelligent systems, Ann Arbor was a great place to boost my knowledge on computer science, as well as to familiarize myself to the lifestyle and culture of western society. With Dr. Georg Essl, I participated in smartphone orchestras and developed a mobile interactive music app called urMus.
 
