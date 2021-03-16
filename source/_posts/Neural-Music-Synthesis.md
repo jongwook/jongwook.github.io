@@ -1,5 +1,5 @@
 ---
-title: 'DRAFT: Neural Music Synthesis'
+title: 'Neural Music Synthesis'
 date: 2018-08-23 22:22:29
 tags: ['Spotify', 'Research']
 ---
@@ -95,13 +95,12 @@ For the WaveNet vocoder, we used [nv-wavenet](https://devblogs.nvidia.com/nv-wav
 
 <p style="text-align: center;"><table style="width: 700px; margin: auto;" border cellspaing="0" cellpadding="0"><thead><tr><th>Condition</th> <th>Scores $\pm$ SEM</th><th>Condition</th> <th>Scores $\pm$ SEM</th></tr></thead><tbody><tr><td>Original</td><td>$4.316 \pm 0.041 $</td><td>tanh-log-abs MSE</td><td>$3.183 \pm 0.056 $</td></tr><tr><td>mu-law Only</td><td>$3.879 \pm 0.051 $</td><td>log-abs MSE</td><td>$3.011 \pm 0.058 $</td></tr><tr><td>Ground-Truth Mel</td><td>$3.378 \pm 0.052 $</td><td>abs MSE</td><td>$ 2.757 \pm 0.058 $</td></tr></tbody></table></p>
 
-<!-- Alternative representations (120 mel, 160 mel, 96 cqt) -->
+<!-- Alternative representations (120 mel, 160 mel, 96 cqt)
 
 - TODO: Ablation Study
 
 - TODO: 100-instrument visualization (4D t-SNE)
 
-<!--
   - 88 from rachel
   - 10 from original
   - 2 from ???
@@ -113,6 +112,6 @@ We showed that it is possible to build a music synthesis model by combining a re
 
 The number of residual channels and the number of layers in the current WaveNet model is limited due to the memory requirements of the nv-wavenet implementation, and the degradation from µ-law quantization was also apparent in the experiments. These limitations can be overcome by implementing Parallel WaveNet, which does not require special CUDA kernels for fast synthesis and uses continuous probability distribution for generation, thereby avoiding the quantization noise.
 
-It is intriguing that the WaveNet vocoder can synthesize polyphonic music from Mel spectrograms having only 80 frequency bins, which are not even aligned to the tuning of the audio files. While more information available from the increased bins help synthesizing more accurate audio, predicting the higher-dimensional representation becomes more difficult and inaccurate, making 80-bin Mel spectrogram a sweet spot for use with WaveNet. (*TODO: support this claim with synthesis quality using different n_mel; theoretical reference*) Introducing an adversarial loss function can be a viable direction to predicting accurate and realistic Mel spectrograms for conditioning WaveNet.
+It is intriguing that the WaveNet vocoder can synthesize polyphonic music from Mel spectrograms having only 80 frequency bins, which are not even aligned to the tuning of the audio files. While more information available from the increased bins help synthesizing more accurate audio, predicting the higher-dimensional representation becomes more difficult and inaccurate, making 80-bin Mel spectrogram a sweet spot for use with WaveNet. Introducing an adversarial loss function can be a viable direction to predicting accurate and realistic Mel spectrograms for conditioning WaveNet.
 
 Our music synthesis model draws audio samples conditioned on timbre embedding and the symbolic music in the form of piano rolls. An interesting extension to this model would be obtaining the inverse; predicting the distribution of timbre embeddings from audio would be useful for instrument recognition and provide a tool for music production where a software instrument can be built automatically from a few audio examples. The other part of the inversion, predicting the piano roll from audio, is essentially automatic music transcription which is a much more formidable task, and the aforementioned autoencoder formulation would be an interesting direction to solve transcription and synthesis simultaneously.
