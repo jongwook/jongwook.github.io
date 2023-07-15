@@ -22,7 +22,7 @@ span.fa a:hover { color: #222; }
 --><span class="fa fa-envelope"><a href="mailto:jongwook@nyu.edu">jongwook@nyu.edu</a></span><!--
 -->
 
-I'm a member of technical staff at OpenAI, where I worked on projects like [CLIP](https://openai.com/blog/clip/) and [Jukebox](https://openai.com/blog/whisper/). My research interests include large-scale multimodal deep learning and music understanding.
+I'm a member of technical staff at OpenAI, where I worked on projects like [CLIP](https://openai.com/blog/clip/) and [Whisper](https://openai.com/blog/whisper/). My research interests include large-scale multimodal deep learning and music understanding.
 
 I completed a Ph.D. in Music Technology at New York University, where I focused in music informatics and machine learning, looking for solutions to automatic transcription, source separation, timbre modeling, etc. In the past, I was a software engineer/data scientist at Kakao Corp and NCSOFT Corp developing recommender systems and application servers.
 
