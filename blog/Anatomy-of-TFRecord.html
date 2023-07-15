@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Anatomy of TFRecord - Jong Wook Kim</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="What is TFRecord?TFRecord is a specific file format often used with TensorFlow, and it is their recommended format for dealing with huge data that does not fit in the memory. For this reason, Google u">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Anatomy of TFRecord">
+<meta property="og:url" content="http://jongwook.github.io/blog/Anatomy-of-TFRecord.html">
+<meta property="og:site_name" content="Jong Wook Kim">
+<meta property="og:description" content="What is TFRecord?TFRecord is a specific file format often used with TensorFlow, and it is their recommended format for dealing with huge data that does not fit in the memory. For this reason, Google u">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2018-01-15T00:27:49.000Z">
+<meta property="article:modified_time" content="2023-07-15T08:14:32.415Z">
+<meta property="article:author" content="Jong Wook Kim">
+<meta property="article:tag" content="TensorFlow">
+<meta property="article:tag" content="TFRecord">
+<meta property="article:tag" content="Keras">
+<meta name="twitter:card" content="summary">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link href="/webfonts/roboto/main.css" rel='stylesheet' type='text/css'>
+  <link href="/webfonts/source-code-pro/main.css" rel="stylesheet" type="text/css">
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+
+<meta name="generator" content="Hexo 5.4.2"></head>
+
+<body>
+  <div id="container">
+    <header id="header">
+  <div id="header-outer" class="outer">
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/bio">Bio</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+          <a class="main-nav-link" href="/categories">Categories</a>
+        
+          <a class="main-nav-link" href="/tags">Tags</a>
+        
+      </nav>
+    </div>
+  </div>
+</header>
+
+    <section id="main" class="outer"><article id="post-Anatomy-of-TFRecord" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Anatomy of TFRecord
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      <a href="/blog/Anatomy-of-TFRecord.html" class="article-date">
+  <time datetime="2018-01-15T00:27:49.000Z" itemprop="datePublished">2018-01-14</time>
+</a>
+      
+      
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <link rel="stylesheet" type="text&#x2F;css" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.5.1/katex.min.css"><h1 id="What-is-TFRecord"><a href="#What-is-TFRecord" class="headerlink" title="What is TFRecord?"></a>What is TFRecord?</h1><p>TFRecord is a specific file format often used with TensorFlow, and it is their <a target="_blank" rel="noopener" href="https://www.tensorflow.org/programmers_guide/datasets#consuming_tfrecord_data">recommended</a> format for dealing with huge data that does not fit in the memory. For this reason, Google uses this format for distributing some of their datasets, such as <a target="_blank" rel="noopener" href="https://magenta.tensorflow.org/datasets/nsynth#files">the NSynth dataset</a>. The extension <code>.tfrecord</code> is used for these files.</p>
+<h1 id="Why-This-Post"><a href="#Why-This-Post" class="headerlink" title="Why This Post?"></a>Why This Post?</h1><p>I was frustrated that the documentation for using TFRecord files are especially lacking, when all I want to do is just read the numbers in the file. I’m writing this primarily for my own reference for dealing with TFRecord data, but hopefully will be helpful for others as well.</p>
+<h1 id="TFRecord-Array-of-Examples"><a href="#TFRecord-Array-of-Examples" class="headerlink" title="TFRecord = Array of Examples"></a>TFRecord = Array of <code>Example</code>s</h1><p>A TFRecord file contains an array of <code>Example</code>s.  <code>Example</code> is a data structure for representing a record, like an observation in a training or test dataset. A record is represented as a set of features, each of which has a name and can be an array of bytes, floats, or 64-bit integers. To summarize:</p>
+<ul>
+<li>An <code>Example</code> contains <code>Features</code>.</li>
+<li><code>Features</code> is a mapping from the feature names stored as <code>string</code>s to <code>Feature</code>s.</li>
+<li>A <code>Feature</code> can be one of <code>BytesList</code>, <code>FloatList</code>, or <code>Int64List</code>.</li>
+</ul>
+<p>These relations are defined in <a target="_blank" rel="noopener" href="https://github.com/tensorflow/tensorflow/blob/master/tensorflow/core/example/example.proto">example.proto</a> and <a target="_blank" rel="noopener" href="https://github.com/tensorflow/tensorflow/blob/master/tensorflow/core/example/feature.proto">feature.proto</a> in the TensorFlow source code, along with extensive comments. As the extension <code>.proto</code> suggests, these definitions are based on protocol buffers.</p>
+<h1 id="Why-Protocol-Buffers"><a href="#Why-Protocol-Buffers" class="headerlink" title="Why Protocol Buffers?"></a>Why Protocol Buffers?</h1><p>Google’s <a target="_blank" rel="noopener" href="https://developers.google.com/protocol-buffers/">Protocol buffers</a>﻿ are a serialization scheme for structured data. In other words, protocol buffers are used for serializing structured data into a byte array or parsing the serialized array as the original data, so that they can be sent over the network or stored as a file. In this sense, it is similar to JSON, XML, or <a target="_blank" rel="noopener" href="https://msgpack.org/">MessagePack</a>.</p>
+<p>Unlike JSON, protocol buffers can only work with the messages whose schema is predefined, using the <a target="_blank" rel="noopener" href="https://developers.google.com/protocol-buffers/docs/proto3">protocol buffer language</a>. The protocol buffer compiler, or <code>protoc</code>, uses the language-agnostic <code>.proto</code> files to generate the optimized code for the serializer and the parser, in the supported languages including C++, Python, and Java.</p>
+<p>With the cost of having to use the definition files and tooling, protocol buffers can offer a lot faster processing speed compared to text-based formats like JSON or XML. Most importantly, it doesn’t make sense to store multimedia data like images or audio in a text-based format. These data need to be stored in large multidimensional numeric arrays, or tensors, and using protocol buffers the content of the file can be directly copied to the system memory and interpreted as tensors without any text processing for the numbers.</p>
+<p>In addition to the efficient binary storage, an <code>Example</code> in TFRecord can contain other simple features like categories or labels, often represented using a single number or a string. So, thanks to the TFRecord format being based on protocol buffers, we can use a single streamlined format for storing both some high-dimensional data and the simple metadata. It’s time for a goodbye to the old days dealing with the heap of media files and the metadata files separately!</p>
+<h1 id="The-Low-Level-Way"><a href="#The-Low-Level-Way" class="headerlink" title="The Low-Level Way"></a>The Low-Level Way</h1><p>The internals for reading the TFRecord format is implemented in C++, in the <a target="_blank" rel="noopener" href="https://github.com/tensorflow/tensorflow/blob/master/tensorflow/core/lib/io/record_reader.cc">RecordReader class</a>. This part is not dealing with protocol buffers yet, but it is just slicing the file into many chunks, each of them being a serialized protocol buffer <code>Example</code>. Internally it uses a 12-byte header and 4-byte footer to store the length of each chunk with the checksums, and also supports optional GZIP compression.</p>
+<p>On the Python side, <code>tf.python_io.tf_record_iterator</code> provides a way to iterate over the serialized <code>Example</code>s in the TFRecord files. Each time the iterator spits a bytes object, which then can be parsed using the protocol buffer class <code>Example</code>.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> tensorflow <span class="keyword">as</span> tf</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> record <span class="keyword">in</span> tf.python_io.tf_record_iterator(<span class="string">&quot;nsynth-valid.tfrecord&quot;</span>):</span><br><span class="line">    example = tf.train.Example()</span><br><span class="line">    example.ParseFromString(record) <span class="comment"># calling protocol buffer API</span></span><br><span class="line">    </span><br><span class="line">    audio = np.array(example.features.feature[<span class="string">&#x27;audio&#x27;</span>].float_list.value)</span><br><span class="line">    pitch = example.features.feature[<span class="string">&#x27;pitch&#x27;</span>].int64_list.value[<span class="number">0</span>]</span><br><span class="line">    </span><br><span class="line">    <span class="built_in">print</span>(<span class="built_in">len</span>(audio), pitch)</span><br></pre></td></tr></table></figure>
+<p>Being a generated protocol buffer message class, <code>tf.train.Example</code> supports <code>ParseFromString</code> method that parses given bytes and populates the corresponding fields. This way, although not very concise, we can directly access the numbers in the TFRecord file without having to deal with the usual TensorFlow boilerplates like <code>tf.Session</code>s or <code>tf.Tensor</code>s.</p>
+<p><strong>A note for MacOS</strong>: This code runs very slow on Macs, because the MacOS versions of the protocol buffers Python package does not ship with the native library by default. It seems that <a target="_blank" rel="noopener" href="https://github.com/tensorflow/tensorflow/issues/15417">Mac users can manually build the package</a> for the maximum performance.</p>
+<h1 id="The-Canonical-Way"><a href="#The-Canonical-Way" class="headerlink" title="The Canonical Way"></a>The Canonical Way</h1><p>Until TensorFlow 1.2, the recommended way for dealing with the influx of data was to use the <a target="_blank" rel="noopener" href="https://www.tensorflow.org/api_guides/python/threading_and_queues">multithreading and queues</a>. However, with the <code>tf.data</code> package becoming official in TensorFlow 1.4, now the recommended way is to use <a target="_blank" rel="noopener" href="https://www.tensorflow.org/programmers_guide/datasets">the Dataset API</a>. So whenever you see the word <code>queue</code>, you may assume that the code is using a deprecated way of dealing with datasets.</p>
+<p>The <a target="_blank" rel="noopener" href="https://github.com/tensorflow/tensorflow/blob/master/tensorflow/examples/how_tos/reading_data/fully_connected_reader.py">fully-connected MNIST example</a> shows how to read a TFRecord file using the Dataset API, and the <code>inputs</code> function contains the core part:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">  dataset = tf.data.TFRecordDataset(filename)</span><br><span class="line">  dataset = dataset.repeat(num_epochs)</span><br><span class="line"></span><br><span class="line">  dataset = dataset.<span class="built_in">map</span>(decode)</span><br><span class="line">  dataset = dataset.<span class="built_in">map</span>(augment)</span><br><span class="line">  dataset = dataset.<span class="built_in">map</span>(normalize)</span><br><span class="line"></span><br><span class="line">  dataset = dataset.shuffle(<span class="number">1000</span> + <span class="number">3</span> * batch_size)</span><br><span class="line">  dataset = dataset.batch(batch_size)</span><br><span class="line"></span><br><span class="line">  iterator = dataset.make_one_shot_iterator()</span><br><span class="line"><span class="keyword">return</span> iterator.get_next()</span><br></pre></td></tr></table></figure>
+<p>What this excerpt does in each line are:</p>
+<ol>
+<li>Create a <code>tf.data.TFRecordDataset</code> instance using the file name(s).</li>
+<li>By calling <code>dataset.repeat(num_epochs)</code>, make everything repeat up to the number of epochs.</li>
+<li>By calling <code>dataset.map(decode)</code>, parse the bytes into a tuple of the image and the label:<ul>
+<li>In the <code>decode</code> function, call <code>tf.parse_single_example()</code>, where:<ul>
+<li>The first argument is the raw bytes, and</li>
+<li>The second argument is a dictionary mapping the feature names and types.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Make a few additional <code>map</code> calls for data augmentation and normalization.</li>
+<li>Shuffle the dataset using <code>dataset.shuffle(buffer_size)</code>:<ul>
+<li>The parameter is the size of the buffer from which the random sample is selected.</li>
+</ul>
+</li>
+<li>Make batches using <code>dataset.batch(batch_size)</code>:<ul>
+<li>Each <code>tf.Tensor</code> in the dataset is prepended with an additional dimension for the batch.</li>
+</ul>
+</li>
+<li>Create an iterator for the resulting <code>dataset</code> using <code>make_one_shot_iterator()</code>.</li>
+<li>Return the TensorFlow operation <code>get_next()</code>, for getting the next iteratee.</li>
+</ol>
+<p>These are the standard steps for using the new Dataset API, which allows functional APIs to transform the dataset in a very modular fashion. For example, this make it very easy to toggle the data augmentation or shuffling, or plug a different set of augmentation methods.</p>
+<h1 id="Taking-The-Best-of-Both-Worlds"><a href="#Taking-The-Best-of-Both-Worlds" class="headerlink" title="Taking The Best of Both Worlds"></a>Taking The Best of Both Worlds</h1><p>If we want to keep using the goodies that Keras provides like its cleaner API and toolings, we can convert the tensorflow operation into a Python generator that can be fed to <code>fit_generator()</code>. This way, rather than starting from the scratch as in the low-level way above, we can benefit from the functional Dataset API for easier data transformation and memory management for large datasets, while keeping using what Keras is good for.</p>
+<p>Below is a full example for loading a TFRecord file and converting it to a generator producing the usual (data, label) tuples:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">inputs</span>(<span class="params">files, batch_size=<span class="number">32</span></span>):</span><br><span class="line">    dataset = tf.data.TFRecordDataset(files).repeat()</span><br><span class="line"></span><br><span class="line">    dataset = dataset.<span class="built_in">map</span>(<span class="keyword">lambda</span> record: tf.parse_single_example(record, features=&#123;</span><br><span class="line">        <span class="string">&#x27;audio&#x27;</span>: tf.FixedLenFeature([<span class="number">64000</span>], tf.float32),</span><br><span class="line">        <span class="string">&#x27;note&#x27;</span>: tf.FixedLenFeature([], tf.int64)</span><br><span class="line">    &#125;))</span><br><span class="line">    dataset = dataset.<span class="built_in">map</span>(<span class="keyword">lambda</span> features: (features[<span class="string">&#x27;audio&#x27;</span>], features[<span class="string">&#x27;note&#x27;</span>]))</span><br><span class="line"></span><br><span class="line">    dataset = dataset.shuffle(<span class="number">8000</span>).batch(batch_size)</span><br><span class="line"></span><br><span class="line">    iterator = dataset.make_one_shot_iterator()</span><br><span class="line">    <span class="keyword">return</span> iterator.get_next()</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">to_generator</span>(<span class="params">inputs</span>):</span><br><span class="line">    <span class="keyword">from</span> keras <span class="keyword">import</span> backend <span class="keyword">as</span> K</span><br><span class="line">    </span><br><span class="line">    sess = K.get_session()</span><br><span class="line">    <span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">        <span class="keyword">yield</span> sess.run(inputs)</span><br></pre></td></tr></table></figure>
+<p>In summary:</p>
+<ul>
+<li>TFRecord and the new Dataset API make a good combination for the simpler data input pipeline.</li>
+<li>You need to know the name and the type of the features to parse.</li>
+<li>You can continue using your Keras code with this new API.</li>
+</ul>
+
+      
+    </div>
+    
+    
+      <footer class="article-footer">
+        
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Keras/" rel="tag">Keras</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/TFRecord/" rel="tag">TFRecord</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/TensorFlow/" rel="tag">TensorFlow</a></li></ul>
+
+      </footer>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/blog/Neural-Music-Synthesis.html" id="article-nav-newer" class="article-nav-link-wrap">
+      <div class="article-nav-title"><span>&lt;</span>&nbsp;
+        
+          Neural Music Synthesis
+        
+      </div>
+    </a>
+  
+  
+    <a href="/blog/Hello-World.html" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Hello World&nbsp;<span>&gt;</span></div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+
+
+
+
+
+
+
+</section>
+    <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2023 Jong Wook Kim<br>
+    </div>
+  </div>
+</footer>
+
+    
+
+<script src="/js/jquery.min.js"></script>
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>
